@@ -1,6 +1,6 @@
 from flask import Flask
 from db import db
-from contacts import contacts
+from rutas import rutas
 app = Flask(__name__)
 
 # Configuración de la base de datos PostgreSQL
@@ -13,7 +13,7 @@ db.init_app(app)
 # Resto de tu código (rutas, configuraciones adicionales, etc.)
 
 
-app.register_blueprint(contacts)
+app.register_blueprint(rutas)
 
 # starting the app
 if __name__ == "__main__":

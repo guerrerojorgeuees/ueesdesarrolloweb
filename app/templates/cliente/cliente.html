@@ -1,0 +1,80 @@
+{% include "header.html" %}
+
+{% block body %}
+<section class="h-100 gradient-form" style="background-color: #eee;">
+
+  <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="row">
+    <div class="col-md-5">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <div class="card card-body">
+        <form action="{{url_for('rutas.add_cliente')}}" method="POST">
+          <div class="form-group">
+            <label for="fullname">Nombre:</label>
+            <input type="text" class="form-control" name="fullname" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="text" class="form-control" name="email" placeholder="Correo electrónico">
+          </div>
+          <div class="form-group">
+            <label for="phone">Teléfono:</label>
+            <input type="text" class="form-control" name="phone" placeholder="Teléfono">
+          </div>
+          <div class="form-group">
+            <label for="cedula">Cédula:</label>
+            <input type="text" class="form-control" name="cedula" placeholder="Cédula">
+          </div>
+          <div class="form-group">
+            <label for="address">Dirección:</label>
+            <input type="text" class="form-control" name="address" placeholder="Dirección">
+          </div>
+          <button class="btn btn-primary btn-block">
+            Guardar 
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <table class="table table-striped table-hover table-bordered table-sm bg-white">
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Correo electrónico</td>
+            <td>Teléfono</td>
+            <td>Operaciones</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cliente in clientes %}
+            <tr>
+              <td>{{cliente.id}}</td>
+              <td>{{cliente.fullname}}</td>
+              <td>{{cliente.email}}</td>
+              <td>{{cliente.phone}}</td>
+              <td>
+                <a href="/edit/{{cliente.id}}" class="btn btn-secondary">Editar</a>
+                <a href="/delete/{{cliente.id}}" class="btn btn-danger btn-delete">Eliminar</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+{% endblock %}

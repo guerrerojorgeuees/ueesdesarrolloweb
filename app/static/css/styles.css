@@ -1,0 +1,101 @@
+.gradient-custom-2 {
+    background: #fccb90;
+    
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+    
+    background: linear-gradient(to right, #cfbd51, #f5df31, #e4dfa1, #f7e452);
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+    .text-white {
+        color: #000!important;
+        text-align: center;
+    }
+    .d-flex {
+        display: -ms-flexbox!important;
+        display: flex!important;
+        justify-content: center;
+    }
+
+/* home */
+
+
+
+
+
+/* Ricardo Style */
+
+
+    .informacion {
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap:15px;
+    }
+    
+    .informacion>p:first-child {
+        font-family: 'Monserrat', sans-serif;
+        font-size: 25px;
+        font-weight: 300;
+    }
+    
+    .contenedor {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 50px auto 45px auto;
+        width: 700px;
+        flex-wrap: wrap;
+        gap:30px;
+    }
+    
+    .contenedor>div {
+        display: flex;
+        align-items: row;
+        justify-content: flex-start;
+        background-color: #601a69;
+        height: 400px;
+        border-radius: 10px;
+        flex-direction: column;
+        padding-top: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        gap: 20px;
+        flex: 1 1 300px;
+    }
+    
+    
+    .txt_small{
+        width: 200px;
+        height: 100%;
+        border-radius: 5px;
+        color: black;
+    }
+    
+    .txt_midium{
+        width: 300px;
+        height: 100%;
+        border-radius: 5px;
+        color: black;
+    }
+    .txt_large{
+        width: 400px;
+        height: 100%;
+        border-radius: 5px;
+        color: black;
+    }
+    
+    
