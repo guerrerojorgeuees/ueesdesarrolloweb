@@ -1,0 +1,43 @@
+{% include "header.html" %}
+
+{% block body %}
+<section class="h-100 gradient-form" style="background-color: #eee;">
+
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h1 style="text-align: center;">Edición Artículo</h1>
+                <div class="card card-body">
+                    <form action="/update/" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="artCodigo">Código:</label>
+                            <input type="text" name="artCodigo" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="artNombre">Nombre:</label>
+                            <input type="text" name="artNombre" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="artFecha">Fecha:</label>
+                            <input type="date" name="artFecha" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="artCantidad">Cantidad:</label>
+                            <input type="text" name="artCantidad" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="artImagen">Imagen:</label>
+                            <input type="file" name="artImagen" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

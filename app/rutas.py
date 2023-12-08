@@ -7,6 +7,11 @@ rutas = Blueprint('rutas', __name__, template_folder='app/templates')
 def index():
     return render_template('inicio.html')
 
+@rutas.route('/pantalla')
+def pantalla():
+    return render_template('articulo/lista_articulos.html')
+
+
 @rutas.route('/login')
 def login():
     return render_template('login.html')
@@ -35,8 +40,9 @@ def add_cliente():
         email = request.form['email']
         cedula = request.form['cedula']
         address = request.form['address']
+        estado = 'A'
         try:
-            new_cliente = Cliente(fullname=fullname, phone=phone, email=email, cedula=cedula, address=address)
+            new_cliente = Cliente(fullname=fullname, phone=phone, email=email, cedula=cedula, address=address,estado=estado)
             db.session.add(new_cliente)
             db.session.commit()
             flash('Cliente agregado exitosamente')
@@ -74,9 +80,9 @@ def update_cliente(id):
 @rutas.route('/delete/<int:id>', methods=['POST', 'GET'])
 def delete_cliente(id):
     cliente = Cliente.query.get(id)
-    db.session.delete(cliente)
+    cliente.estado = 'I'  # Actualizar el estado a inactivo en lugar de eliminar físicamente
     db.session.commit()
-    flash('Cliente Eliminado exitosamente')
+    flash('Cliente marcado como inactivo exitosamente')
     return redirect(url_for('rutas.mostrar_cliente'))
 
 
@@ -88,4 +94,16 @@ def delete_cliente(id):
 def mostrar_articulos():
     # articulos = Articulo.query.all()
     # return render_template('articulo/articulos.html', articulos=articulos)
-    return render_template('articulo/articulos.html')
+    return render_template('articulo/articulo.html')
+
+
+
+
+# Articulo Crud
+
+
+@rutas.route('/venta')
+def mostrar_ventas():
+    # articulos = Articulo.query.all()
+    # return render_template('articulo/articulos.html', articulos=articulos)
+    return render_template('venta/venta.html')

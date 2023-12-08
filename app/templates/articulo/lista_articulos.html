@@ -1,0 +1,53 @@
+{% include "header.html" %}
+
+{% block body %}
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container">
+    <h1 class="text-center mt-4 mb-4">Artículos Disponibles</h1>
+
+    <div class="row">
+      <!-- Loop para mostrar cada artículo -->
+      {% for articulo in lista_de_articulos %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <!-- Carrusel de imágenes -->
+          <div class="tu-clase-de-carrusel">
+            {% for imagen in articulo.imagenes %}
+            <div>
+              <img src="{{ imagen }}" class="card-img-top" alt="Imagen de artículo">
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">{{ articulo.nombre }}</h5>
+            <p class="card-text">Código: {{ articulo.codigo }}</p>
+            <p class="card-text">Precio: {{ articulo.precio }}</p>
+
+            <!-- Botones de Acción -->
+            <a href="#" class="btn btn-primary btn-block">Detalles</a>
+            <a href="#" class="btn btn-warning btn-block">Editar</a>
+            <a href="#" class="btn btn-danger btn-block">Dar de Baja</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Script de Slick Carousel -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<!-- Tu script personalizado para inicializar el carrusel -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.tu-clase-de-carrusel').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+    });
+  });
+</script>
+{% endblock %}

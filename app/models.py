@@ -12,7 +12,9 @@ class Cliente(db.Model):
     address = db.Column(db.String(255), nullable=True)
     phone = db.Column(db.String(20), nullable=True)
     email = db.Column(db.String(255), nullable=False)
+    estado = db.Column(db.String(1), nullable=False)
 
     def __repr__(self):
         return f'<Uees {self.fullname}>'
+
 
