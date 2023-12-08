@@ -22,5 +22,6 @@ CREATE TABLE uees.articulo (
   lote VARCHAR(20),
   descripcion VARCHAR(255),
   precio numeric(10,2),
-  stock  int4   -- Afectar el stock en la venta 
+  stock  int4,  -- Afectar el stock en la venta
+  imagen VARCHAR(255)
 );

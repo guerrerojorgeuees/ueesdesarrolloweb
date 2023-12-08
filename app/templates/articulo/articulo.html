@@ -19,30 +19,52 @@
           {% endif %}
         {% endwith %}
         <div class="card card-body">
-          <form action="" method="POST" enctype="multipart/form-data">
+          <form action="{{url_for('rutas.add_articulo')}}" method="POST">
             <div class="form-group">
-              <label for="artCodigo">Código:</label>
-              <input type="text" class="form-control" name="artCodigo" placeholder="Código">
+            <label for="codigo">Codigo:</label>
+            <input type="text" class="form-control" name="codigo" placeholder="Codigo">
             </div>
             <div class="form-group">
-              <label for="artNombre">Nombre:</label>
-              <input type="text" class="form-control" name="artNombre" placeholder="Nombre">
+              <label for="nombre">Nombre:</label>
+              <input type="text" class="form-control" name="nombre" placeholder="Nombre">
             </div>
+
             <div class="form-group">
-              <label for="artFecha">Fecha:</label>
-              <input type="date" class="form-control" name="artFecha" placeholder="Fecha">
+              <label for="fecha_vencimiento">Fecha Ven:</label>
+              <input type="text" class="form-control" name="fecha_vencimiento" placeholder="Fecha vencimiento">
             </div>
+
             <div class="form-group">
-              <label for="artCantidad">Cantidad:</label>
-              <input type="text" class="form-control" name="artCantidad" placeholder="Cantidad">
+              <label for="fecha_empaque">Fecha Emp:</label>
+              <input type="text" class="form-control" name="fecha_empaque" placeholder="Fecha Empaque">
             </div>
+
             <div class="form-group">
-              <label for="artImagen">Imagen:</label>
-              <input type="file" class="form-control" name="artImagen">
+              <label for="lote">Lote:</label>
+              <input type="text" class="form-control" name="lote" placeholder="Lote">
             </div>
-            <button class="btn btn-primary btn-block">
-              Guardar 
-            </button>
+
+            <div class="form-group">
+              <label for="descripcion">Descripción:</label>
+              <input type="text" class="form-control" name="descripcion" placeholder="Descripción">
+            </div>
+
+            <div class="form-group">
+              <label for="precio">Precio:</label>
+              <input type="text" class="form-control" name="precio" placeholder="Precio">
+            </div>
+
+            <div class="form-group">
+              <label for="stock">Stock:</label>
+              <input type="text" class="form-control" name="stock" placeholder="Stock">
+            </div>
+              <div class="form-group">
+                <label for="artImagen">Imagen:</label>
+                <input type="text" class="form-control" name="imagen">
+              </div>
+              <button class="btn btn-primary btn-block">
+                Guardar
+              </button>
           </form>
         </div>
       </div>
@@ -63,13 +85,13 @@
             {% for articulo in articulos %}
               <tr>
                 <td>{{articulo.id}}</td>
-                <td>{{articulo.artCodigo}}</td>
-                <td>{{articulo.artNombre}}</td>
-                <td>{{articulo.artFecha}}</td>
-                <td>{{articulo.artCantidad}}</td>
+                <td>{{articulo.codigo}}</td>
+                <td>{{articulo.nombre}}</td>
+                <td>{{articulo.fecha_empaque}}</td>
+                <td>{{articulo.stock}}</td>
                 <td>
-                  <a href="/edit/" class="btn btn-secondary">Editar</a>
-                  <a href="/delete/" class="btn btn-danger btn-delete">Eliminar</a>
+                  <a href="/editArticulo/{{articulo.id}}" class="btn btn-secondary">Editar</a>
+                  <a href="/deleteArticulo/{{articulo.id}}" class="btn btn-danger btn-delete">Eliminar</a>
                 </td>
               </tr>
             {% endfor %}

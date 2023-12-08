@@ -33,6 +33,7 @@ class Articulo(db.Model):
     descripcion = db.Column(db.String(255), nullable=False)
     precio = db.Column(db.Numeric(10, 2), nullable=True)
     stock = db.Column(db.Integer, nullable=False)
+    imagen = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
         return f'<Uees {self.nombre}>'

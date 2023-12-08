@@ -113,10 +113,11 @@ def add_articulo():
             descripcion = request.form['descripcion']
             precio = request.form['precio']
             stock = request.form['stock']
+            imagen = request.form['imagen']
             try:
                 new_articulo = Articulo(codigo=codigo, nombre=nombre, fecha_empaque=fecha_empaque,
                                         fecha_vencimiento=fecha_vencimiento, lote=lote, descripcion=descripcion,
-                                        precio=precio, stock=stock)
+                                        precio=precio, stock=stock, imagen=imagen)
                 db.session.add(new_articulo)
                 db.session.commit()
                 flash('articulo agregado exitosamente')
@@ -146,6 +147,7 @@ def update_articulo(id):
         descripcion = request.form['descripcion']
         precio = request.form['precio']
         stock = request.form['stock']
+        imagen = request.form['imagen']
 
         articulo = Articulo.query.get(id)
         articulo.codigo = codigo
@@ -156,6 +158,7 @@ def update_articulo(id):
         articulo.descripcion = descripcion
         articulo.precio = precio
         articulo.stock = stock
+        articulo.imagen = imagen
 
         db.session.commit()
         flash('Articulo actualizado exitosamente')
