@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from models import Cliente, db  # Asegúrate de importar la clase correcta
+from models import Articulo
 
 rutas = Blueprint('rutas', __name__, template_folder='app/templates')
 
@@ -89,16 +90,88 @@ def delete_cliente(id):
 
 # Articulo Crud
 
-
 @rutas.route('/articulo')
-def mostrar_articulos():
-    # articulos = Articulo.query.all()
-    # return render_template('articulo/articulos.html', articulos=articulos)
-    return render_template('articulo/articulo.html')
+def mostrar_articulo():
+    articulos = Articulo.query.all()
+    return render_template('articulo/articulo.html', articulos=articulos)
 def stock():
     # articulos = Articulo.query.all()
     # return render_template('articulo/articulos.html', articulos=articulos)
     return render_template('articulo/stock.html')
+
+
+@rutas.route('/add_articulo', methods=['POST'])
+def add_articulo():
+    try:
+        if request.method == 'POST':
+            # echa_empaque,fecha_vencimiento,lote,descripcion,precio,stock
+            codigo = request.form['codigo']
+            nombre = request.form['nombre']
+            fecha_empaque = request.form['fecha_empaque']
+            fecha_vencimiento = request.form['fecha_vencimiento']
+            lote = request.form['lote']
+            descripcion = request.form['descripcion']
+            precio = request.form['precio']
+            stock = request.form['stock']
+            try:
+                new_articulo = Articulo(codigo=codigo, nombre=nombre, fecha_empaque=fecha_empaque,
+                                        fecha_vencimiento=fecha_vencimiento, lote=lote, descripcion=descripcion,
+                                        precio=precio, stock=stock)
+                db.session.add(new_articulo)
+                db.session.commit()
+                flash('articulo agregado exitosamente')
+                return redirect(url_for('rutas.mostrar_articulo'))
+            except Exception as e:
+                flash(str(e))
+                return redirect(url_for('rutas.mostrar_articulo'))
+    except Exception as eF:
+        flash(str(eF))
+
+
+
+@rutas.route('/editArticulo/<int:id>', methods=['POST', 'GET'])
+def get_articulo(id):
+    articulo = Articulo.query.get(id)
+    return render_template('articulo/articulo_edicion.html', articulo=articulo)
+
+
+@rutas.route('/updateArticulo/<int:id>', methods=['POST'])
+def update_articulo(id):
+    if request.method == 'POST':
+        codigo = request.form['codigo']
+        nombre = request.form['nombre']
+        fecha_empaque = request.form['fecha_empaque']
+        fecha_vencimiento = request.form['fecha_vencimiento']
+        lote = request.form['lote']
+        descripcion = request.form['descripcion']
+        precio = request.form['precio']
+        stock = request.form['stock']
+
+        articulo = Articulo.query.get(id)
+        articulo.codigo = codigo
+        articulo.nombre = nombre
+        articulo.fecha_empaque = fecha_empaque
+        articulo.fecha_vencimiento = fecha_vencimiento
+        articulo.lote = lote
+        articulo.descripcion = descripcion
+        articulo.precio = precio
+        articulo.stock = stock
+
+        db.session.commit()
+        flash('Articulo actualizado exitosamente')
+        return redirect(url_for('rutas.mostrar_articulo'))
+
+
+@rutas.route('/deleteArticulo/<int:id>', methods=['POST', 'GET'])
+def delete_articulo(id):
+    articulo = Articulo.query.get(id)
+    db.session.delete(articulo)
+    db.session.commit()
+    flash('Articulo Eliminado exitosamente')
+    return redirect(url_for('rutas.mostrar_articulo'))
+
+
+
 
 
 
