@@ -54,6 +54,7 @@
             <td>Nombre</td>
             <td>Correo electrónico</td>
             <td>Teléfono</td>
+            <td>Estado</td>
             <td>Operaciones</td>
           </tr>
         </thead>
@@ -64,6 +65,16 @@
               <td>{{cliente.fullname}}</td>
               <td>{{cliente.email}}</td>
               <td>{{cliente.phone}}</td>
+              <td>
+                {% if cliente.estado == 'A' %}
+                <span style="color: green;">Activo</span>
+              {% elif cliente.estado == 'I' %}
+                <span style="color: red;">Inactivo</span>
+              {% else %}
+                {{cliente.estado}}
+              {% endif %}
+
+              </td>
               <td>
                 <a href="/edit/{{cliente.id}}" class="btn btn-secondary">Editar</a>
                 <a href="/delete/{{cliente.id}}" class="btn btn-danger btn-delete">Dar de Baja</a>
