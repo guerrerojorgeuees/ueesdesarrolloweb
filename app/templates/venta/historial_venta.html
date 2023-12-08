@@ -1,0 +1,69 @@
+{% include "header.html" %}
+
+{% block body %}
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-10">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="card card-body">
+          <h2 class="text-center mb-4">Historial de Ventas</h2>
+          
+          <!-- Filtro por rango de fechas -->
+          <form action="{{ url_for('rutas.filtrar_ventas') }}" method="post">
+            <div class="form-row mb-3">
+              <div class="col">
+                <label for="fecha_inicio">Fecha de Inicio:</label>
+                <input type="date" class="form-control" name="fecha_inicio" required>
+              </div>
+              <div class="col">
+                <label for="fecha_fin">Fecha de Fin:</label>
+                <input type="date" class="form-control" name="fecha_fin" required>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+              </div>
+            </div>
+          </form>
+          
+          <!-- Lista de Ventas -->
+          <table class="table table-striped table-hover table-bordered table-sm bg-white">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Fecha</th>
+                <!-- Puedes agregar más columnas según sea necesario -->
+              </tr>
+            </thead>
+            <tbody>
+              {% for venta in ventas %}
+                <tr>
+                  <td>{{ venta.id }}</td>
+                  <td>{{ venta.producto_nombre }}</td>
+                  <td>{{ venta.cantidad }}</td>
+                  <td>{{ venta.total }}</td>
+                  <td>{{ venta.fecha }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

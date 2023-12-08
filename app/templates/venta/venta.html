@@ -2,66 +2,63 @@
 
 {% block body %}
 <section class="h-100 gradient-form" style="background-color: #eee;">
-
-  <div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-md-8">
-      <h1 style="text-align: center;">Artículos Disponibles</h1>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="card">
-<div class="tu-clase-de-carrusel">
-  <div>
-    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen de artículo 1">
-  </div>
-  <div>
-    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen de artículo 2">
-  </div>
-  <div>
-    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen de artículo 3">
-  </div>
-</div>
-
-            <div class="card-body">
-              <h5 class="card-title">Artículo 1</h5>
-              <button class="btn btn-primary btn-block">Agregar</button>
-            </div>
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-8">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="card card-body">
+          <h2 class="text-center mb-4">Crear Venta</h2>
+          
+          <div class="mb-4">
+            <h4>Seleccionar Artículos</h4>
+            <!-- Aquí puedes incluir campos de búsqueda o una lista de artículos con checkboxes -->
           </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen de artículo 2">
-            <div class="card-body">
-              <h5 class="card-title">Artículo 2</h5>
-              <button class="btn btn-primary btn-block">Agregar</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Imagen de artículo 3">
-            <div class="card-body">
-              <h5 class="card-title">Artículo 3</h5>
-              <button class="btn btn-primary btn-block">Agregar</button>
-            </div>
+
+       
+    
+<div class="mb-4">
+    <h4>Seleccionar Cliente</h4>
+    <form action="" method="post">
+      <div class="form-group">
+        <label for="cliente">Cliente:</label>
+        <select class="form-control" name="cliente" required>
+          <option value="" disabled selected>Selecciona un cliente</option>
+          {% for cliente in clientes_activos %}
+            <option value="{{ cliente.id }}">{{ cliente.fullname }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      
+      <!-- Agrega más campos según sea necesario para los detalles de la venta -->
+     <div class="form-group">
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" class="form-control" name="cantidad" required>
+      </div>
+     <!--   <div class="form-group">
+        <label for="precio">Precio Unitario:</label>
+        <input type="number" class="form-control" name="precio" required>
+      </div> -->
+      
+      <!-- Botón para Enviar el Formulario -->
+      <button type="submit" class="btn btn-primary btn-block">Realizar Venta</button>
+    </form>
+  </div>
+  
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 </section>
-<!-- Script de Slick Carousel -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
-<!-- Tu script personalizado para inicializar el carrusel -->
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.tu-clase-de-carrusel').slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000, // Puedes ajustar la velocidad del carrusel en milisegundos
-    });
-  });
-</script>
 {% endblock %}

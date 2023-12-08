@@ -95,7 +95,10 @@ def mostrar_articulos():
     # articulos = Articulo.query.all()
     # return render_template('articulo/articulos.html', articulos=articulos)
     return render_template('articulo/articulo.html')
-
+def stock():
+    # articulos = Articulo.query.all()
+    # return render_template('articulo/articulos.html', articulos=articulos)
+    return render_template('articulo/stock.html')
 
 
 
@@ -104,6 +107,21 @@ def mostrar_articulos():
 
 @rutas.route('/venta')
 def mostrar_ventas():
-    # articulos = Articulo.query.all()
-    # return render_template('articulo/articulos.html', articulos=articulos)
-    return render_template('venta/venta.html')
+    # Obtén la lista de clientes activos para el menú desplegable
+    clientes_activos = Cliente.query.filter_by(estado='A').all()
+    
+    return render_template('venta/venta.html', clientes_activos=clientes_activos)
+
+@rutas.route('/listado_ventas')
+def listado_ventas():
+    
+    return render_template('venta/listado_ventas.html')
+
+@rutas.route('/detalle_venta')
+def detalle_venta():
+    return render_template('venta/detalle_venta.html')
+
+
+@rutas.route('/historial_venta')
+def historial_venta():
+    return render_template('venta/historial_venta.html')

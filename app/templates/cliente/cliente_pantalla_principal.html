@@ -1,0 +1,54 @@
+{% include "header.html" %}
+
+{% block body %}
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-8">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="card card-body">
+          <h2 class="text-center mb-4">Resumen de Datos del Cliente</h2>
+          
+          <!-- Detalles específicos del cliente -->
+          <div class="mb-3">
+            <strong>Nombre:</strong> {{ cliente.fullname }}
+          </div>
+          <div class="mb-3">
+            <strong>Cédula:</strong> {{ cliente.cedula }}
+          </div>
+          <div class="mb-3">
+            <strong>Dirección:</strong> {{ cliente.address }}
+          </div>
+          <div class="mb-3">
+            <strong>Teléfono:</strong> {{ cliente.phone }}
+          </div>
+          <div class="mb-3">
+            <strong>Correo:</strong> {{ cliente.email }}
+          </div>
+
+          <div class="mb-3">
+            <a href="{{ url_for('rutas.actualizar_datos_cliente') }}" class="btn btn-primary">Actualizar Datos</a>
+          </div>
+          <div class="mb-3">
+            <a href="{{ url_for('rutas.historial_ventas') }}" class="btn btn-info">Historial de Ventas</a>
+          </div>
+          <div class="mb-3">
+            <a href="{{ url_for('rutas.consultar_stock') }}" class="btn btn-success">Consultar Stock de Artículos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

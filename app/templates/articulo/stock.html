@@ -1,0 +1,62 @@
+{% include "header.html" %}
+
+{% block body %}
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-10">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <div class="card card-body">
+          <h2 class="text-center mb-4">Consulta de Stock</h2>
+          
+          <!-- Filtro por nombre de artículo -->
+          <form action="{{ url_for('rutas.filtrar_stock') }}" method="post">
+            <div class="form-row mb-3">
+              <div class="col">
+                <label for="nombre_articulo">Nombre del Artículo:</label>
+                <input type="text" class="form-control" name="nombre_articulo" required>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-primary">Consultar</button>
+              </div>
+            </div>
+          </form>
+          
+          <!-- Lista de Artículos con Stock -->
+          <table class="table table-striped table-hover table-bordered table-sm bg-white">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Stock</th>
+                <!-- Puedes agregar más columnas según sea necesario -->
+              </tr>
+            </thead>
+            <tbody>
+              {% for articulo in articulos %}
+                <tr>
+                  <td>{{ articulo.id }}</td>
+                  <td>{{ articulo.nombre }}</td>
+                  <td>{{ articulo.stock }}</td>
+                  <!-- Puedes agregar más columnas según sea necesario -->
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
