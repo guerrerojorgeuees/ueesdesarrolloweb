@@ -20,7 +20,6 @@
         <div class="card card-body">
           <h2 class="text-center mb-4">Detalles de Venta</h2>
           
-          <!-- Detalles específicos de la venta -->
           <div class="mb-3">
             <strong>ID:</strong> {{ venta.id }}
           </div>
@@ -33,9 +32,6 @@
           <div class="mb-3">
             <strong>Cantidad:</strong> {{ venta.cantidad }}
           </div>
-          <!-- Puedes agregar más detalles según sea necesario -->
-
-          <!-- Botón para regresar a la lista de ventas -->
           <a href="{{ url_for('rutas.listado_ventas') }}" class="btn btn-secondary">Volver a la Lista de Ventas</a>
         </div>
       </div>

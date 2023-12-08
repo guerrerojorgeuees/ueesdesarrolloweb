@@ -22,8 +22,17 @@
           
           <div class="mb-4">
             <h4>Seleccionar Artículos</h4>
-            <!-- Aquí puedes incluir campos de búsqueda o una lista de artículos con checkboxes -->
-          </div>
+            <form action="" method="post">
+                {% for articulo in articulos_activos %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="articulos_seleccionados[]" value="{{ articulo.id }}">
+                        <label class="form-check-label" for="articulo_{{ articulo.id }}">
+                            {{ articulo.nombre }} - Precio: {{ articulo.precio }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
 
        
     

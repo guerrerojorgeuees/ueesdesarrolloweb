@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash
 from models import Cliente, db  # Asegúrate de importar la clase correcta
 from models import Articulo
 
@@ -114,10 +114,11 @@ def add_articulo():
             precio = request.form['precio']
             stock = request.form['stock']
             imagen = request.form['imagen']
+            estado = 'A'
             try:
                 new_articulo = Articulo(codigo=codigo, nombre=nombre, fecha_empaque=fecha_empaque,
                                         fecha_vencimiento=fecha_vencimiento, lote=lote, descripcion=descripcion,
-                                        precio=precio, stock=stock, imagen=imagen)
+                                        precio=precio, stock=stock, imagen=imagen,estado=estado)
                 db.session.add(new_articulo)
                 db.session.commit()
                 flash('articulo agregado exitosamente')
@@ -168,25 +169,22 @@ def update_articulo(id):
 @rutas.route('/deleteArticulo/<int:id>', methods=['POST', 'GET'])
 def delete_articulo(id):
     articulo = Articulo.query.get(id)
-    db.session.delete(articulo)
+    articulo.estado = 'I'  # Actualizar el estado a inactivo en lugar de eliminar físicamente
     db.session.commit()
     flash('Articulo Eliminado exitosamente')
     return redirect(url_for('rutas.mostrar_articulo'))
 
 
 
-
-
-
-# Articulo Crud
+# venta Crud
 
 
 @rutas.route('/venta')
 def mostrar_ventas():
     # Obtén la lista de clientes activos para el menú desplegable
     clientes_activos = Cliente.query.filter_by(estado='A').all()
-    
-    return render_template('venta/venta.html', clientes_activos=clientes_activos)
+    articulos_activos = Articulo.query.filter_by(estado='A').all()
+    return render_template('venta/venta.html', clientes_activos=clientes_activos,articulos_activos=articulos_activos)
 
 @rutas.route('/listado_ventas')
 def listado_ventas():
