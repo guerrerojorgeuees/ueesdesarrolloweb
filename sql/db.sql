@@ -17,11 +17,15 @@ ALTER TABLE "uees"."cliente"
   OWNER TO "postgres";
 
 
+
+
+--- Eliminar la secuencia de la BDD
 --- tabla de articulo
-CREATE SEQUENCE articulo_id_seq START 1;
--- Crear la tabla de Articulos
+CREATE SEQUENCE uees.articulo_id_seq START 1;
+
+--- Eliminar la tabla y volver a crear 
 CREATE TABLE "uees"."articulo" (
-  "id" int4 NOT NULL DEFAULT nextval('"uees".articulo_id_seq1'::regclass),
+  "id" int4 NOT NULL DEFAULT nextval('"uees".articulo_id_seq'::regclass),
   "codigo" varchar(10) COLLATE "pg_catalog"."default",
   "nombre" varchar(255) COLLATE "pg_catalog"."default",
   "fecha_empaque" timestamp(6),
