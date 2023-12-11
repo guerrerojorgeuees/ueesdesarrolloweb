@@ -23,6 +23,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
+              {% if logged %}
               <li class="nav-item active">
                 <a class="nav-link" href="/">Inicio</a>
               </li>
@@ -36,8 +37,9 @@
                 <a class="nav-link" href="/venta">Ventas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/login">Cerrar Sesion</a>
               </li>
+              {% endif %}
             </ul>
           </div>
         </div>

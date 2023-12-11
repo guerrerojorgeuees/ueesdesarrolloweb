@@ -1,7 +1,11 @@
-CREATE SEQUENCE cliente_id_seq START 1;
+CREATE DATABASE bd_uees WITH OWNER = postgres;
+CREATE SCHEMA uees;
+ALTER DATABASE bd_uees SET search_path TO uees;
+
+CREATE SEQUENCE uees.cliente_id_seq START 1;
 -- Crear la tabla utilizando la secuencia
 CREATE TABLE "uees"."cliente" (
-  "id" int4 NOT NULL DEFAULT nextval('"uees".cliente_id_seq1'::regclass),
+  "id" int4 NOT NULL DEFAULT nextval('"uees".cliente_id_seq'::regclass),
   "fullname" varchar(255) COLLATE "pg_catalog"."default",
   "cedula" varchar(20) COLLATE "pg_catalog"."default",
   "address" varchar(255) COLLATE "pg_catalog"."default",
@@ -15,9 +19,6 @@ CREATE TABLE "uees"."cliente" (
 
 ALTER TABLE "uees"."cliente" 
   OWNER TO "postgres";
-
-
-
 
 --- Eliminar la secuencia de la BDD
 --- tabla de articulo
@@ -41,4 +42,16 @@ CREATE TABLE "uees"."articulo" (
 ;
 
 ALTER TABLE "uees"."articulo" 
+  OWNER TO "postgres";
+
+
+CREATE SEQUENCE "uees".user_id_seq START 1;
+CREATE TABLE "uees"."user" (
+  "id" int4 NOT NULL DEFAULT nextval('"uees".articulo_id_seq'::regclass),
+  "username" varchar(50) COLLATE "pg_catalog"."default",
+  "password" varchar(50) COLLATE "pg_catalog"."default",
+  "role" varchar(1) COLLATE "pg_catalog"."default"
+);
+
+ALTER TABLE "uees"."user" 
   OWNER TO "postgres";

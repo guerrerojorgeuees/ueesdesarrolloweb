@@ -38,3 +38,16 @@ class Articulo(db.Model):
 
     def __repr__(self):
         return f'<Uees {self.nombre}>'
+
+# Modelo de Articulo
+class User(db.Model):
+    __tablename__ = 'user'
+    __table_args__ = {'schema': 'uees'}  # Agrega esta línea para especificar el esquema
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(10), nullable=False)
+    password = db.Column(db.String(10), nullable=False)
+    role = db.Column(db.String(1), nullable=False)
+
+    def __repr__(self):
+        return f'<Uees {self.username}>'

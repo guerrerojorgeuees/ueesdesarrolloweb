@@ -83,8 +83,15 @@
         })
         .then(response => response.json())
         .then(data => {
-            // Manejar la respuesta si es necesario
-            console.log('Respuesta del servidor:', data);
+            // Si es admin o cliente
+            if (data['data'] == "A" || data['data'] == "C"){
+              //sessionStorage.setItem('logged', true);
+              window.location = '/cliente';
+            }
+            else{
+              alert(data['mensaje']); 
+            }
+            console.log('Respuesta del servidor:', data['data']);
         })
         .catch(error => {
             console.error('Error al enviar datos:', error);
